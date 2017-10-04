@@ -20,4 +20,43 @@ public class Tractor {
     public void distribuirTractor(int cantidad){
         // Distribuir arena de una casilla
     }
+      
+    private int[] moverN(int x, int y,int [][] terreno){
+		int[] newPos=new int[2];
+		if(y<=terreno.length && y!=0){
+			newPos[0]=x;
+			newPos[1]=y-1;
+		}
+		return newPos;
+	}
+	
+    
+	private int[] moverS(int x, int y,int [][] terreno){
+		int[] newPos=new int[2];
+		if(y<=terreno.length && y!=terreno.length){
+			newPos[0]=x;
+			newPos[1]=y+1;
+		}
+		return newPos;
+	}
+	
+	
+	private int[] moverE(int x, int y,int [][] terreno){
+		int[] newPos=new int[2];
+		if(y<=terreno.length && y!=terreno.length){
+			newPos[0]=x+1;
+			newPos[1]=y;
+		}
+		return newPos;
+	}
+	
+	
+	private int[] moverO(int x, int y,int [][] terreno){
+		int[] newPos=new int[2];
+		if(x<=terreno.length && x!=0){
+			newPos[0]=x-1;
+			newPos[1]=y;
+		}
+		return newPos;
+	}
 }

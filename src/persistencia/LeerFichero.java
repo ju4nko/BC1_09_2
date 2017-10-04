@@ -69,6 +69,10 @@ public class LeerFichero {
 			}
 		}
        }
+       /**
+        * Quitar el main y ponerlo en el menu para que muestre todos los datos del fichero
+        * @param args 
+        */
        public static void main(String[] args){
            String ruta = "/resources/Terreno.txt";
            LeerFichero leer = new LeerFichero(ruta);
