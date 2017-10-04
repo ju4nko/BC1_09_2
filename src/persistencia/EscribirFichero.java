@@ -10,11 +10,15 @@ import java.util.ArrayList;
 
 public class EscribirFichero {
 
-    
+    /**
+     * 
+     * @param arrayDatos
+     * @param arrayTerreno 
+     */
         public static void introducirDatosFichero(int[] arrayDatos,int[][] arrayTerreno){
                
 		//String[] lineas = { "Uno", "Dos", "Tres", "Cuatro", "Cinco", "Seis", "Siete", "..." };
-                
+                //
 		FileWriter fichero = null;
 		try {
 
