@@ -5,6 +5,8 @@
  */
 package dominio;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author juanjo
@@ -20,8 +22,40 @@ public class Tractor {
     public void distribuirTractor(int k,int MAX,int cant_distribuir){
         // Distribuir arena de una casilla 
     }
+    /**
+     * Método que comprueba los adyacentes del tractor y los mete en una lista
+     * @param x
+     * @param y
+     * @param t
+     * @return 
+     */
+    public ArrayList<Casilla> accionTractor(int x,int y,Terreno t){
+        int i,j;
+        Casilla aux;
+        Casilla posTractor = new Casilla(x,y); // Obtenemos la casilla donde está el tractor
+        t.PonerVisitado(posTractor);
+        ArrayList<Casilla> listaAdyacentes = new ArrayList();
+        for(i=-1;i<=1;i++){ // Todos los adyacentes de la casilla
+            for(j=-1;j<=1;j++){                
+                    //Obtenemos la posición en el terreno de los adyacentes
+                    aux=new Casilla(x+i,y+j);                   
+                    if(t.estaDentro(aux)){
+                        if(!t.EstaVisitado(aux)){
+                            if((Math.abs(i)+Math.abs(j))!=2){ // Cogemos los adyacentes que no sean diagonales
+                            listaAdyacentes.add(aux);
+                            }
+                        }                       
+                    }               
+            }
+        }
+        return listaAdyacentes;
+    }
     
-    
+    public void imprimirLista(ArrayList<Casilla> lista){
+        for(int i=0;i<lista.size();i++){
+            System.out.println(lista.get(i));
+        }
+    }
     
     
       
@@ -63,4 +97,11 @@ public class Tractor {
 		
 		return newPos;
 	}
+        
+        public static void main(String[]args){
+            Terreno t = new Terreno(3,3,8);
+            Tractor tractor = new Tractor();
+            ArrayList<Casilla> lista = tractor.accionTractor(1,1,t);
+            tractor.imprimirLista(lista);           
+        }
 }

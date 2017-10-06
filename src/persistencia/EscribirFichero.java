@@ -5,6 +5,7 @@
  */
 package persistencia;
 
+import dominio.Casilla;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ public class EscribirFichero {
      * @param arrayDatos
      * @param arrayTerreno 
      */
-        public static void introducirDatosFichero(int[] arrayDatos,int[][] arrayTerreno){
+        public static void introducirDatosFichero(int[] arrayDatos,Casilla[][] arrayTerreno){
                
 		//String[] lineas = { "Uno", "Dos", "Tres", "Cuatro", "Cinco", "Seis", "Siete", "..." };
                 //
