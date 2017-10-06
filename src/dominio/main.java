@@ -5,6 +5,7 @@
  */
 package dominio;
 
+import java.util.ArrayList;
 import persistencia.EscribirFichero;
 import persistencia.LeerFichero;
 import utilidades.leer;
@@ -19,9 +20,9 @@ public class main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        int x,y,k,MAX,C,F;
         boolean op=true;
 	int opcion=0;
-    
 	do{
             System.out.println("\n\n+++++++ MENU PRINCIPAL +++++++");
             System.out.print("1 ---> Introducir datos por tecaldo");
@@ -30,15 +31,14 @@ public class main {
             System.out.print("\n");
                 opcion=leer.entero("\nElija una opcion:");
             System.out.println("");
-
             switch(opcion){ // LECTURA POR TECLADO
                 case 1:
-                    int x = leer.entero("Introduzca la posicion en filas del tractor");
-                    int y = leer.entero("Introduzca la posicion en columnas del tractor");
-                    int k = leer.entero("Introduzca el número deseado de arena a distribuir de cada casilla");
-                    int MAX = leer.entero("Introduzca el número máximo de arena en cada casilla: ");
-                    int C = leer.entero("Ingrese el numero de filas del terreno: ");
-                    int F = leer.entero("Ingrese el numero de columnas del terreno: ");
+                    x = leer.entero("Introduzca la posicion en filas del tractor");
+                    y = leer.entero("Introduzca la posicion en columnas del tractor");
+                    k = leer.entero("Introduzca el número deseado de arena a distribuir de cada casilla");
+                    MAX = leer.entero("Introduzca el número máximo de arena en cada casilla: ");
+                    C = leer.entero("Ingrese el numero de filas del terreno: ");
+                    F = leer.entero("Ingrese el numero de columnas del terreno: ");
                 /**
                  * Crear objeto terreno con longitud dada y un maximo dado
                  */
@@ -52,8 +52,14 @@ public class main {
                 case 2: //LECTURA POR FICHERO
                     String ruta = "/resources/Terreno.txt";
                     LeerFichero leer = new LeerFichero(ruta);
-                    //ArrayList<Integer> lista = new ArrayList();
-                    //lista = leer.listaDatos(ruta);
+                    ArrayList<Integer> lista = new ArrayList();
+                    lista = leer.listaDatos(ruta);
+                    x = lista.get(0);
+                    y = lista.get(1);
+                    k = lista.get(2);
+                    MAX = lista.get(3);
+                    C = lista.get(4);
+                    F = lista.get(5);
                     break;
                 
                 case 3: //SALIR

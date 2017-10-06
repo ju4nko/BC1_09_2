@@ -5,6 +5,7 @@
  */
 package dominio;
 
+import java.util.ArrayList;
 import utilidades.leer;
 
 /**
@@ -12,6 +13,9 @@ import utilidades.leer;
  * @author juanjo
  */
 public class Terreno {
+                      //O,N,E,S
+    // ArrayList<Int> {0,1,2,3}
+    
     private int k; //Cantidad deseada en cada casilla
     private int s; //Cantidad a distribuir entre casillas vecinas
     private int V; //Cantidad total de arena del terreno
@@ -29,16 +33,25 @@ public class Terreno {
         this.filas = filas;
         this.MAX = MAX;
         this.columnas=columnas;
-        casillas=rellenarMatrizAleatorios(filas,columnas,0,MAX);
+        casillas=new int[filas][columnas];
+        //casillas = inicializarTerreno();
         k = 5;
+        t = new Tractor();
     }
     
     public void crearTerreno(){
-        System.out.println("Creando el terreno...");
-        int valor = 0;
-        int suma_valor = 0;
-                     
+        casillas = rellenarMatrizAleatorios(filas,columnas,0,MAX);             
     }
+    
+    public void inicializarTerreno(){
+        for(int i=0;i<filas;i++){
+            for(int j=0;j<filas;j++){
+                casillas[i][j]=0;
+            }
+        }
+    }
+    
+    
     public void imprimirTerreno(){
         for(int i=0;i<filas;i++){
             for(int j=0;j<columnas;j++){
@@ -80,6 +93,43 @@ public class Terreno {
             
         }
     }
+    
+    public ArrayList<Adyacente> buscarAdyacentes(int x,int y){
+       Adyacente ad1= new Adyacente();//Izquierda
+       Adyacente ad2= new Adyacente();
+       Adyacente ad3= new Adyacente();
+       Adyacente ad4= new Adyacente();
+       ArrayList<Adyacente> lista = new ArrayList();
+       //ad1 = t.moverO(x, y, casillas);
+       //ad2 = t.moverN(x, y, casillas);
+       //ad3 = t.moverE(x, y, casillas);
+       //ad4 = t.moverS(x, y, casillas);
+//       if(estaDentroAdyacente(ad1)){
+//           // Llamada Metodo Distribuir
+//           lista.add(ad1);
+//       }
+//       if(estaDentroAdyacente(ad2)){
+//           // Llamada Metodo Distribuir
+//       }
+//       if(estaDentroAdyacente(ad3)){
+//           // Llamada Metodo Distribuir
+//       }
+//       if(estaDentroAdyacente(ad4)){
+//           // Llamada Metodo Distribuir
+//       }
+       
+       return lista;
+    }
+    
+    public boolean estaDentroAdyacente(int[] adyacente){
+        if(adyacente[0]>0 && adyacente[0]<columnas-1
+                && adyacente[1]>0 && adyacente[1]<filas-1){
+                    return true;
+         
+        }
+       return false;
+    }
+    
     public static void main(String[] args){
         imprimirMatrizAleatorios();
     }
