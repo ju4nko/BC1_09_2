@@ -6,6 +6,7 @@
 package dominio;
 
 import persistencia.EscribirFichero;
+import persistencia.LeerFichero;
 import utilidades.leer;
 
 /**
@@ -49,7 +50,10 @@ public class main {
                 break;    
                 
                 case 2: //LECTURA POR FICHERO
-                    
+                    String ruta = "/resources/Terreno.txt";
+                    LeerFichero leer = new LeerFichero(ruta);
+                    //ArrayList<Integer> lista = new ArrayList();
+                    //lista = leer.listaDatos(ruta);
                     break;
                 
                 case 3: //SALIR
