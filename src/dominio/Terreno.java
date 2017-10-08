@@ -87,8 +87,7 @@ public class Terreno {
         int cantidad = 0;
         for(int i = 0;i<filas;i++){
             for(int j=0;j<columnas;j++){
-                  casillas[i][j]= new Casilla(i,j);
-                  //System.out.println(casillas[i][j].getCantArena());
+                  casillas[i][j]= new Casilla(i,j);                              
             }
             
         }
@@ -118,6 +117,9 @@ public class Terreno {
     public void QuitarVisitado(Casilla aux){
         casillas[aux.getFila()][aux.getColumna()].setVisitado(false);
     }
+    public Casilla getCasilla(int x, int y){
+        return casillas[x][y];
+    }
     
      // Metodo para imprimir el tablero inicialmente
     public String toString (){
@@ -129,12 +131,5 @@ public class Terreno {
             texto+="\n";
         }
         return texto;
-    }
-    
-//    public static void main(String[] args){
-//        Terreno t = new Terreno(3,3,8);
-//        System.out.println(t);
-//    }
-
-    
+    }   
 }

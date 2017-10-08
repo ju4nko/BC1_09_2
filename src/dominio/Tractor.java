@@ -23,47 +23,54 @@ public class Tractor {
         // Distribuir arena de una casilla 
     }
     
-    public ArrayList backtracking(int etapa,int Sol[],int s,ArrayList listaDist,
-                                        ArrayList<Casilla> adyacentes){
+    public void backtracking(int etapa,int Sol[],int s,
+                               ArrayList<Casilla> adyacentes,int MAX){
         int i;
         //ArrayList lista = new ArrayList();
         if(etapa==Sol.length){
             if(esSolucion(Sol,etapa,s)){
                  //Mostrar solución
-                 //System.out.println(imprimirSol(Sol));
-                 listaDist.add(Sol);//Añadimos a la lista el vector
+                 System.out.println(imprimirSol(Sol));
+                 //listaDist.add(Sol);//Añadimos a la lista el vector
                  //Sumamos con la lista
-            }
-           
+                 imprimeLista(sumarListas(Sol,adyacentes,MAX));
+                 System.out.println();
+            }           
         }else{
             for(i=0;i<=s;i++){
                     Sol[etapa] = i;
-                    backtracking(etapa+1,Sol,s,listaDist,adyacentes); 
+                    backtracking(etapa+1,Sol,s,adyacentes,MAX); 
             }
-        }
-       return listaDist;
+        }       
     }
-    
-    public void sumarListas(ArrayList listaDist,ArrayList<Casilla> adyacentes){
+    public ArrayList<Integer> sumarListas(int[] sol,ArrayList<Casilla> adyacentes,int MAX){
         ArrayList<Integer> listaSuma = new ArrayList<Integer>();
-        for(int i=0;i<listaDist.size();i++){
-            //listaSuma.add(listaDist.get(i)+adyacentes.get(i).getCantArena());
+        int suma =0;
+        for(int i=0;i<sol.length;i++){
+            suma= sol[i]+adyacentes.get(i).getCantArena();
+            if(suma<=MAX){
+                listaSuma.add(sol[i]+adyacentes.get(i).getCantArena());
+            }else{
+                listaSuma.add(sol[i]);
+            }
+            
         }
+        return listaSuma;
     }
-    
-    
+     
    public boolean esSolucion(int sol[],int etapa,int valor){
        int suma=0;
        for(int i=0;i<sol.length;i++){
            suma+=sol[i];
        }
-       return suma<=valor;
+       return suma==valor;
    }
     public String imprimirSol(int [] vector){
        String cadena="";
        for(int i=0;i<vector.length;i++){
-           cadena+=vector[i];
+           cadena+=vector[i]+" ";
        }
+       System.out.println();
        return cadena;
    }
     /**
@@ -76,17 +83,19 @@ public class Tractor {
     public ArrayList<Casilla> accionTractor(int x,int y,Terreno t){
         int i,j;
         Casilla aux;
-        Casilla posTractor = new Casilla(x,y); // Obtenemos la casilla donde está el tractor
+        //Casilla posTractor = new Casilla(x,y); // Obtenemos la casilla donde está el tractor
+        Casilla posTractor = t.getCasilla(x, y);
         t.PonerVisitado(posTractor);
         ArrayList<Casilla> listaAdyacentes = new ArrayList();
         for(i=-1;i<=1;i++){ // Todos los adyacentes de la casilla
             for(j=-1;j<=1;j++){                
                     //Obtenemos la posición en el terreno de los adyacentes
-                    aux=new Casilla(x+i,y+j);                   
+                    //aux=new Casilla(x+i,y+j); 
+                    aux = t.getCasilla(x+i, y+j);
                     if(t.estaDentro(aux)){
                         if(!t.EstaVisitado(aux)){
                             if((Math.abs(i)+Math.abs(j))!=2){ // Cogemos los adyacentes que no sean diagonales
-                            listaAdyacentes.add(aux);
+                                listaAdyacentes.add(aux);
                             }
                         }                       
                     }               
@@ -105,13 +114,13 @@ public class Tractor {
     
     public void imprimirLista(ArrayList<Casilla> lista){
         for(int i=0;i<lista.size();i++){
-            System.out.println(lista.get(i).getCantArena());
+            System.out.print(lista.get(i).getCantArena()+ " ");
         }
     }
     
     public void imprimeLista(ArrayList lista){
         for(int i=0;i<lista.size();i++){
-            System.out.println(lista.get(i));
+            System.out.print(lista.get(i)+ " ");
         }
     }
     
@@ -138,33 +147,29 @@ public class Tractor {
 	
 	
 	public int[] moverE(int x, int y,int [][] terreno){
-		int[] newPos=new int[2];
-		
+		int[] newPos=new int[2];		
 			newPos[0]=x+1;
-			newPos[1]=y;
-		
+			newPos[1]=y;		
 		return newPos;
 	}
 	
 	
 	public int[] moverO(int x, int y,int [][] terreno){
-		int[] newPos=new int[2];
-		
+		int[] newPos=new int[2];		
 			newPos[0]=x-1;
-			newPos[1]=y;
-		
+			newPos[1]=y;		
 		return newPos;
-	}
+	} 
         
         public static void main(String[]args){
             Terreno t = new Terreno(3,3,8);
-            //t.imprimirMatrizAleatorios();
+            System.out.print(t.imprimirTerreno());
+            System.out.println("COMBINACIONES");
             Tractor tractor = new Tractor();
             ArrayList<Casilla> lista = tractor.accionTractor(1,1,t);
             tractor.imprimirLista(lista);
-//            int sol[] = new int[4];
-//            ArrayList array = new ArrayList();
-//            array = tractor.backtracking(0, sol, 3, array);
-//            tractor.imprimeLista(array);
+            int sol[] = new int[4];
+            int MAX = 8;
+            tractor.backtracking(0, sol, 3, lista,8);
         }
 }
