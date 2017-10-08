@@ -87,31 +87,14 @@ public class Terreno {
         int cantidad = 0;
         for(int i = 0;i<filas;i++){
             for(int j=0;j<columnas;j++){
-                cantidad = (int)(Math.random()*max+min);
-                casillas[i][j] = new Casilla(i,j);
-                casillas[i][j].setCantArena(cantidad);
+                  casillas[i][j]= new Casilla(i,j);
+                  //System.out.println(casillas[i][j].getCantArena());
             }
             
         }
         return casillas;
     }
-    /**
-     * Imprimir la matriz para pruebas
-     */
-    public void imprimirMatrizAleatorios(){
-        Casilla [][]matriz = rellenarTerrenoAleatorio(0,8);
-        for(int i = 0;i<matriz.length;i++){
-            for(int j=0;j<matriz.length;j++){
-                System.out.println(matriz[i][j]);
-            }
-            
-        }
-    }
-    
-    
-       
-       
-    
+   
     
     public boolean estaDentroAdyacente(int[] adyacente){
         if(adyacente[0]>0 && adyacente[0]<columnas-1
@@ -148,10 +131,10 @@ public class Terreno {
         return texto;
     }
     
-    public static void main(String[] args){
-        Terreno t = new Terreno(3,3,8);
-        System.out.println(t);
-    }
+//    public static void main(String[] args){
+//        Terreno t = new Terreno(3,3,8);
+//        System.out.println(t);
+//    }
 
     
 }

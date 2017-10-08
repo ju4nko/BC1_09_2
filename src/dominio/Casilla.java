@@ -9,13 +9,15 @@ public class Casilla {
     private int fila,columna;
     private boolean visitado;
     private int cant_arena;
+    private int MAX;
     
     // Constructor
     public Casilla(int fila,int columna){
         this.fila=fila;
         this.columna=columna;
         this.visitado=false;
-        this.cant_arena=0;
+        this.MAX = 8;
+        this.cant_arena=genAleatorio(0,MAX);
     }
 
     // Devolver una fila
@@ -72,6 +74,9 @@ public class Casilla {
             return true;
         }
         return false;
+    }
+    public int genAleatorio(int min,int max){
+        return (int)(Math.random()*max+min);
     }
 
     // Muestra las coordenadas de una casilla
