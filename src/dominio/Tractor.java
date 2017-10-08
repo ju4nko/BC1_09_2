@@ -23,16 +23,22 @@ public class Tractor {
         // Distribuir arena de una casilla 
     }
     
+    /**
+     * Método backtracking
+     * @param etapa
+     * @param Sol
+     * @param s
+     * @param adyacentes
+     * @param MAX 
+     */
     public void backtracking(int etapa,int Sol[],int s,
                                ArrayList<Casilla> adyacentes,int MAX){
         int i;
-        //ArrayList lista = new ArrayList();
         if(etapa==Sol.length){
             if(esSolucion(Sol,etapa,s)){
-                 //Mostrar solución
+                 // IMPRIMIMOS LAS COMBINACIONES POSIBLES DE DISTRIBUIR ARENA
                  System.out.println(imprimirSol(Sol));
-                 //listaDist.add(Sol);//Añadimos a la lista el vector
-                 //Sumamos con la lista
+                 // SUMAMOS LA ARENA A LA CASILLA A DISTRIBUIR
                  imprimeLista(sumarListas(Sol,adyacentes,MAX));
                  System.out.println();
             }           
@@ -43,6 +49,13 @@ public class Tractor {
             }
         }       
     }
+    /**
+     * Método Que suma dos listas para dar una resultado de la suma de ambas
+     * @param sol
+     * @param adyacentes
+     * @param MAX
+     * @return 
+     */
     public ArrayList<Integer> sumarListas(int[] sol,ArrayList<Casilla> adyacentes,int MAX){
         ArrayList<Integer> listaSuma = new ArrayList<Integer>();
         int suma =0;
@@ -51,6 +64,7 @@ public class Tractor {
             if(suma<=MAX){
                 listaSuma.add(sol[i]+adyacentes.get(i).getCantArena());
             }else{
+                // SI SUPERA EL MÁXIMO IGNORAMOS LA SUMA
                 listaSuma.add(sol[i]);
             }
             
@@ -58,6 +72,13 @@ public class Tractor {
         return listaSuma;
     }
      
+   /**
+    * COMPARAMOS SI ES IGUAL A LA CANTIDAD DESEADA 
+    * @param sol
+    * @param etapa
+    * @param valor cantidad deseada
+    * @return 
+    */ 
    public boolean esSolucion(int sol[],int etapa,int valor){
        int suma=0;
        for(int i=0;i<sol.length;i++){
