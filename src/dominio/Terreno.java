@@ -37,12 +37,42 @@ public class Terreno {
         crearTerreno();
         //casillas = inicializarTerreno();
         k = 5;
-        t = new Tractor();
+        t = new Tractor(genAleatorio(0,filas-1),genAleatorio(0,columnas-1));
     }
     
     public Casilla[][] crearTerreno(){
               casillas = rellenarTerrenoAleatorio(0,MAX);  
               return casillas;
+    }
+    
+    public ArrayList<Casilla> accionTractor(){
+        int i,j;
+        Casilla aux;
+        //Casilla posTractor = new Casilla(x,y); // Obtenemos la casilla donde está el tractor
+        Casilla posTractor = getCasilla(t.getX(),t.getY());
+        System.out.println("COORDENADAS: "+t.getX()+" "+t.getY());
+        
+        PonerVisitado(posTractor);
+        ArrayList<Casilla> listaAdyacentes = new ArrayList();
+        for(i=-1;i<=1;i++){ // Todos los adyacentes de la casilla
+            for(j=-1;j<=1;j++){                
+                    //Obtenemos la posición en el terreno de los adyacentes
+                    aux=new Casilla(t.getX()+i,t.getY()+j); 
+                    //aux = getCasilla(0+i, 0+j);
+                    if(estaDentro(aux)){
+                        if(!EstaVisitado(aux)){
+                            aux=getCasilla(t.getX()+i,t.getY()+j);
+                            if((Math.abs(i)+Math.abs(j))!=2){ // Cogemos los adyacentes que no sean diagonales
+                                listaAdyacentes.add(aux);
+                            }
+                        }                       
+                    }               
+            }
+        }
+        return listaAdyacentes;
+    }
+    public Tractor getTractor(){
+        return t;
     }
     
 //    public void inicializarTerreno(){
@@ -119,6 +149,10 @@ public class Terreno {
     }
     public Casilla getCasilla(int x, int y){
         return casillas[x][y];
+    }
+    
+    public int genAleatorio(int min,int max){
+        return (int)(Math.random()*max+min);
     }
     
      // Metodo para imprimir el tablero inicialmente

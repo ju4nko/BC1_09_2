@@ -23,6 +23,7 @@ public class main {
         int x,y,k,MAX,C,F;
         boolean op=true;
 	int opcion=0;
+        Terreno t;
 	do{
             System.out.println("\n\n+++++++ MENU PRINCIPAL +++++++");
             System.out.print("1 ---> Introducir datos por tecaldo");
@@ -42,7 +43,7 @@ public class main {
                 /**
                  * Crear objeto terreno con longitud dada y un maximo dado
                  */
-                Terreno t = new Terreno(C,F,MAX);
+                t = new Terreno(C,F,MAX);
                 // Guardamos los datos en una lista
                 int arrayDatos[] ={x,y,k,MAX,C,F};
                 // Escribimos en el fichero con la lista y la matriz
@@ -60,11 +61,22 @@ public class main {
                     MAX = lista.get(3);
                     C = lista.get(4);
                     F = lista.get(5);
+                    
+                    
+                    //PARTE DISTRIBUCION
+                    t = new Terreno(F,C,MAX);
+                    System.out.print(t.imprimirTerreno());
+                    System.out.println("COMBINACIONES");
+                    ArrayList<Casilla> listaCasillas = t.accionTractor();
+                    t.getTractor().imprimirLista(listaCasillas);
+                    int sol[] = new int[listaCasillas.size()];
+                    int s = MAX-k;
+                    t.getTractor().backtracking(0, sol, s, listaCasillas,MAX);
                     break;
                 
                 case 3: //SALIR
                 op=false;
-                System.out.print("Gracias por sus consutlas");
+                System.out.print("Gracias por sus consultas");
                 break;
             }
         }while(op==true);
