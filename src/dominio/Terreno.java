@@ -10,7 +10,7 @@ import utilidades.leer;
 
 /**
  *
- * @author juanjo
+ * @author juanjo,guillermo y raquel
  */
 public class Terreno {
     //O,N,E,S
