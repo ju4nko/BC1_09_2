@@ -2,7 +2,7 @@ package dominio;
 
 /**
  *
- * @author Luis Ayuga
+ * @author Juan José, Guillermo y Raquel
  */
 public class Casilla {
     // Atributos
