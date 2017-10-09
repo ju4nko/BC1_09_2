@@ -17,7 +17,7 @@ public class Casilla {
         this.columna=columna;
         this.visitado=false;
         this.MAX = 8;
-        this.cant_arena=genAleatorio(0,MAX);
+        this.cant_arena=genAleatorioArena(0,MAX);
     }
 
     // Devolver una fila
@@ -75,7 +75,7 @@ public class Casilla {
         }
         return false;
     }
-    public int genAleatorio(int min,int max){
+    public int genAleatorioArena(int min,int max){
         return (int)(Math.random()*max+min);
     }
 
