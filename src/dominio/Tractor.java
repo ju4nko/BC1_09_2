@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author juanjo
+ * @author juanjo, guillermo y raquel
  */
 public class Tractor {
     //Coordenadas del tractor
