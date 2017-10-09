@@ -154,7 +154,6 @@ public class Terreno {
      * @return
      */
     public Casilla[][] rellenarTerrenoAleatorio(int min, int max) {
-        int cantidad = 0;
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
                 casillas[i][j] = new Casilla(i, j);
