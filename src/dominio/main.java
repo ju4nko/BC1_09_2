@@ -12,7 +12,7 @@ import utilidades.leer;
 
 /**
  *
- * @author juanjo
+ * @author juanjo, guillermo y raquel
  */
 public class main {
 
