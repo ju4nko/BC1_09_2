@@ -6,7 +6,7 @@
 package dominio;
 
 import java.util.ArrayList;
-import utilidades.leer;
+import persistencia.LeerFichero;
 
 /**
  *
@@ -24,32 +24,43 @@ public class Terreno {
     private int filas;
     private int columnas;
     private Casilla[][] casillas;
+    private Casilla casillaTractor;
+    private boolean aleatorio; //True si quieres que sea un terreno aleatorio
 
-    private void colocarTractor() {
-
-    }
-
-    public Terreno(int filas, int columnas, int MAX) {
+    public Terreno(int filas,int columnas,int MAX,boolean aleatorio){
         this.filas = filas;
         this.MAX = MAX;
         this.columnas = columnas;
+        this.aleatorio = aleatorio;
         casillas = new Casilla[filas][columnas];
-        crearTerreno();
+        crearTerreno(aleatorio);
+        t = new Tractor(genAleatorio(0, filas - 1), genAleatorio(0, columnas - 1));
         //casillas = inicializarTerreno();
         k = 5;
-        t = new Tractor(genAleatorio(0, filas - 1), genAleatorio(0, columnas - 1));
     }
-
-    public void crearTerreno() {
-        casillas = rellenarTerrenoAleatorio(0, MAX);
-        comprobarAleatorio();
+    
+    public Casilla getCasillaTractor(){
+        return casillas[t.getX()][t.getY()];
+    }
+    
+    /**
+     * Si quieres que se cree de forma aleatoria se pone el valor a true 
+     */
+    public void crearTerreno(boolean Aleatorio) {
+        if(aleatorio){
+            casillas = rellenarTerrenoAleatorio(0, MAX); 
+        }else{
+            casillas = rellenaTerreno(0,MAX);
+        }
+        //Colocar Tractor
+        
     }
 
     public void comprobarAleatorio() {
         int suma=0;
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
-                suma=+ casillas[i][j].getCantArena();
+                suma+= casillas[i][j].getCantArena();
             }
         }
         if(suma>(filas*columnas*k)){ //COMPROBAR QUE LA CANTIDAD DE ARENA NO SUPERA LA CANTIDAD DEBIDA
@@ -85,21 +96,18 @@ public class Terreno {
         }
     }
     
-    
-
     public ArrayList<Casilla> accionTractor() {
         int i, j;
         Casilla aux;
         //Casilla posTractor = new Casilla(x,y); // Obtenemos la casilla donde está el tractor
         Casilla posTractor = getCasilla(t.getX(), t.getY());
         System.out.println("COORDENADAS: " + t.getX() + " " + t.getY());
-
         PonerVisitado(posTractor);
         ArrayList<Casilla> listaAdyacentes = new ArrayList();
         for (i = -1; i <= 1; i++) { // Todos los adyacentes de la casilla
             for (j = -1; j <= 1; j++) {
                 //Obtenemos la posición en el terreno de los adyacentes
-                aux = new Casilla(t.getX() + i, t.getY() + j);
+                aux = new Casilla(t.getX() + i, t.getY() + j,genAleatorioArena(0,1));
                 //aux = getCasilla(0+i, 0+j);
                 if (estaDentro(aux)) {
                     if (!EstaVisitado(aux)) {
@@ -118,6 +126,7 @@ public class Terreno {
         return t;
     }
 
+
 //    public void inicializarTerreno(){
 //        for(int i=0;i<filas;i++){
 //            for(int j=0;j<filas;j++){
@@ -132,6 +141,10 @@ public class Terreno {
 
     public Casilla[][] getCasillas() {
         return casillas;
+    }
+    
+    public Casilla getCasilla(int x, int y){
+        return casillas[x][y];
     }
 
     public String imprimirTerreno() {
@@ -156,10 +169,28 @@ public class Terreno {
     public Casilla[][] rellenarTerrenoAleatorio(int min, int max) {
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
-                casillas[i][j] = new Casilla(i, j);
+                casillas[i][j] = new Casilla(i, j,genAleatorioArena(min,max));
             }
         }
         return casillas;
+    }
+    
+    public Casilla[][] rellenaTerreno(int min,int max){
+        ArrayList<Integer> listaArena = new ArrayList<Integer>();
+        String ruta = "/resources/Terreno.txt";
+        LeerFichero lectura = new LeerFichero(ruta);
+        listaArena = lectura.leerTerreno(ruta);
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                casillas[i][j] = new Casilla(i, j,listaArena.get(0));
+                System.out.print(listaArena.get(0));
+                listaArena.remove(0);
+            }
+        }
+        return casillas;
+    }
+    public int genAleatorioArena(int min,int max){
+        return (int)(Math.random()*max+min);
     }
 
     public boolean estaDentroAdyacente(int[] adyacente) {
@@ -184,10 +215,6 @@ public class Terreno {
     // Metodo para poner una casilla del tablero a NO Visitado
     public void QuitarVisitado(Casilla aux) {
         casillas[aux.getFila()][aux.getColumna()].setVisitado(false);
-    }
-
-    public Casilla getCasilla(int x, int y) {
-        return casillas[x][y];
     }
 
     public int genAleatorio(int min, int max) {

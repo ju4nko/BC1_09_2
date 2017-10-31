@@ -21,10 +21,8 @@ public class LeerFichero {
       */
     String ruta;
      public LeerFichero(String ruta){
-       
-        
-        
-         lecturaCompleta(ruta);
+         this.ruta = ruta;
+         //lecturaCompleta();
      }
      
      public boolean esNumero(String string){
@@ -36,7 +34,7 @@ public class LeerFichero {
          return true;
      }
     
-       public void lecturaCompleta(String ruta){
+       public void lecturaCompleta(){
            // Fichero del que queremos leer
                 //String ruta = "/resources/Terreno.txt";
 		File fichero = new File(ruta);
@@ -48,7 +46,7 @@ public class LeerFichero {
                         fr = new InputStreamReader(getClass().getResourceAsStream(ruta));
                        
 			// Leemos el contenido del fichero
-			System.out.println("... Leemos el contenido del fichero ...");
+			System.out.println("... LECTURA COMPLETA DEL FICHERO ...");
 			s = new Scanner(fr);
 
 			// Leemos linea a linea el fichero
@@ -69,16 +67,6 @@ public class LeerFichero {
 			}
 		}
        }
-       /**
-        * Quitar el main y ponerlo en el menu para que muestre todos los datos del fichero
-        * @param args 
-        */
-       public static void main(String[] args){
-           String ruta = "/resources/Terreno.txt";
-           LeerFichero leer = new LeerFichero(ruta);
-           //ArrayList<Integer> lista = new ArrayList();
-           //lista = leer.listaDatos(ruta);
-       }
        
        public ArrayList<Integer> listaDatos(String ruta){
            // Fichero del que queremos leer
@@ -92,10 +80,8 @@ public class LeerFichero {
 		try {
                         fr = new InputStreamReader(getClass().getResourceAsStream(ruta));
 			// Leemos el contenido del fichero
-			System.out.println("... Leemos el contenido del fichero ...");
+			System.out.println("... Leemos las características del terreno ...");
 			s = new Scanner(fr);
-                        
-			 
                         s.nextLine(); // Nos saltamos la cabecera
 			while (s.hasNextLine()) {
                                     array.add(Integer.parseInt(s.next()));
@@ -114,6 +100,43 @@ public class LeerFichero {
 			}
 		}
                 return array;
+       }
+       
+       public ArrayList<Integer> leerTerreno(String ruta){
+            // Fichero del que queremos leer
+                //String ruta = "/resources/Terreno.txt";
+		File fichero = new File(ruta);
+                Reader fr;
+		Scanner s = null;
+                ArrayList<Integer> lista = new ArrayList<Integer>();
+
+		try {
+                    
+                        fr = new InputStreamReader(getClass().getResourceAsStream(ruta));
+                       
+			// Leemos el contenido del fichero
+			System.out.println("... Leemos la cantidad de arena del terreno ...");
+			s = new Scanner(fr);
+			// Leemos linea a linea el fichero
+                        // Obviamos las dos primeras líneas
+                        s.nextLine();
+                        s.nextLine();
+			while (s.hasNextLine()) {
+                                lista.add(s.nextInt());// Imprimimos la linea
+			}
+
+		} catch (Exception ex) {
+			System.out.println("Mensaje: " + ex.getMessage());
+		} finally {
+			// Cerramos el fichero tanto si la lectura ha sido correcta o no
+			try {
+				if (s != null)
+					s.close();
+			} catch (Exception ex2) {
+				System.out.println("Mensaje 2: " + ex2.getMessage());
+			}
+		}
+                return lista;
        }
        
       

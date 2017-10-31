@@ -12,12 +12,12 @@ public class Casilla {
     private int MAX;
     
     // Constructor
-    public Casilla(int fila,int columna){
+    public Casilla(int fila,int columna,int cant_arena){
         this.fila=fila;
         this.columna=columna;
         this.visitado=false;
         this.MAX = 8;
-        this.cant_arena=genAleatorioArena(0,MAX);
+        this.cant_arena=cant_arena;
     }
 
     // Devolver una fila
@@ -75,10 +75,7 @@ public class Casilla {
         }
         return false;
     }
-    public int genAleatorioArena(int min,int max){
-        return (int)(Math.random()*max+min);
-    }
-
+    
     // Muestra las coordenadas de una casilla
     @Override
     public String toString() {

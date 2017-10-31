@@ -24,9 +24,10 @@ public class main {
         boolean op=true;
 	int opcion=0;
         Terreno t;
+        Tractor tractor;
 	do{
             System.out.println("\n\n+++++++ MENU PRINCIPAL +++++++");
-            System.out.print("1 ---> Introducir datos por tecaldo");
+            System.out.print("1 ---> Introducir datos por teclado");
             System.out.print("\n2 ---> Leer datos de un fichero");
             System.out.print("\n3 ---> Salir");
             System.out.print("\n");
@@ -43,7 +44,7 @@ public class main {
                 /**
                  * Crear objeto terreno con longitud dada y un maximo dado
                  */
-                t = new Terreno(C,F,MAX);
+                t = new Terreno(C,F,MAX,false);
                 // Guardamos los datos en una lista
                 int arrayDatos[] ={x,y,k,MAX,C,F};
                 // Escribimos en el fichero con la lista y la matriz
@@ -53,6 +54,7 @@ public class main {
                 case 2: //LECTURA POR FICHERO
                     String ruta = "/resources/Terreno.txt";
                     LeerFichero leer = new LeerFichero(ruta);
+                    leer.lecturaCompleta();
                     ArrayList<Integer> lista = new ArrayList();
                     lista = leer.listaDatos(ruta);
                     x = lista.get(0);
@@ -62,16 +64,24 @@ public class main {
                     C = lista.get(4);
                     F = lista.get(5);
                     
-                    
                     //PARTE DISTRIBUCION
-                    t = new Terreno(F,C,MAX);
+                    t = new Terreno(F,C,MAX,false);
+                    //Obtenemos la casilla del tractor
+                    //Casilla casillaTractor = t.getCasilla(t.getTractor().getX(),t.getTractor().getY()); 
+                    Casilla casillaTractor = t.getCasillaTractor();
                     System.out.print(t.imprimirTerreno());
                     System.out.println("COMBINACIONES");
                     ArrayList<Casilla> listaCasillas = t.accionTractor();
                     t.getTractor().imprimirLista(listaCasillas);
                     int sol[] = new int[listaCasillas.size()];
-                    int s = MAX-k;
-                    t.getTractor().backtracking(0, sol, s, listaCasillas,MAX);
+                    int s = casillaTractor.getCantArena()-k;
+                    //for(int i=0;i<listaCasillas.size();i++){
+                        //System.out.print("("+listaCasillas.get(i).getFila()+","+listaCasillas.get(i).getColumna()+")");
+                        t.getTractor().backtracking(0, sol, s, listaCasillas,MAX);
+                    //}
+                    
+                    // Movemos el tractor a una casilla adyacente
+                    
                     break;
                 
                 case 3: //SALIR
