@@ -39,8 +39,20 @@ public class Terreno {
         k = 5;
     }
     
+    
+    public Tractor getTractor() {
+       return t;
+    }
     public Casilla getCasillaTractor(){
         return casillas[t.getX()][t.getY()];
+    }
+    
+    public Casilla[][] getCasillas() {
+        return casillas;
+    }
+    
+    public Casilla getCasilla(int x, int y){
+        return casillas[x][y];
     }
     
     /**
@@ -122,31 +134,14 @@ public class Terreno {
         return listaAdyacentes;
     }
 
-    public Tractor getTractor() {
-        return t;
-    }
+  
 
 
-//    public void inicializarTerreno(){
-//        for(int i=0;i<filas;i++){
-//            for(int j=0;j<filas;j++){
-//                casillas[i][j]=0;
-//            }
-//        }
-//    }
     // Metodo para comprobar si una casilla esta dentro del terreno
     public boolean estaDentro(Casilla aux) {
         return aux.getFila() >= 0 && aux.getFila() <= filas && aux.getColumna() >= 0 && aux.getColumna() <= (columnas);
     }
-
-    public Casilla[][] getCasillas() {
-        return casillas;
-    }
     
-    public Casilla getCasilla(int x, int y){
-        return casillas[x][y];
-    }
-
     public String imprimirTerreno() {
         String texto = "\n TERRENO \n\n";
         for (int i = 0; i < casillas.length; i++) {

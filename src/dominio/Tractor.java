@@ -60,10 +60,7 @@ public class Tractor {
                  if(sumaValida(Sol,adyacentes,MAX)){
                      crearListaDistribucion(Sol,adyacentes,MAX);
                      //generarAcciones(crearListaDistribucion(Sol,adyacentes,MAX),adyacentes); 
-                 }
-                 
-                 // SUMAMOS LA ARENA A LA CASILLA A DISTRIBUIR
-                
+                 }              
                  System.out.println();
             }           
         }else{
@@ -109,14 +106,11 @@ public class Tractor {
     }
     
     public void generarAcciones(Distribucion[] listaDist,ArrayList<Casilla> adyacentes,
-                                 int[] Sol,int MAX){
-        
+                                 int[] Sol,int MAX){  
         Accion acciones[] = new Accion[listaDist.length];
         for(int i=0;i<adyacentes.size();i++){
             //crearListaDistribucion(Sol,adyacentes,MAX,adyacentes);
-        }
-        
-        
+        }       
     }
      
    /**
@@ -140,9 +134,7 @@ public class Tractor {
                 System.out.print("("+lista.get(j).getFila()+","+lista.get(j).getColumna()+")");
            }
        System.out.print(")]");
-       System.out.println();
-       
-        
+       System.out.println();    
    }
     
     public Distribucion[] crearListaDistribucion(int[] cantidades,ArrayList<Casilla> casillas,int MAX){
