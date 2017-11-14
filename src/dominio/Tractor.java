@@ -42,6 +42,11 @@ public class Tractor {
         this.y = y;
     }
     
+    public Casilla getCasillaTractor(){
+        return casillaTractor;
+    }
+    
+    
     /**
      * Método backtracking
      * @param etapa
@@ -58,10 +63,10 @@ public class Tractor {
                  // IMPRIMIMOS LAS COMBINACIONES POSIBLES DE DISTRIBUIR ARENA
                  //imprimirSol(Sol,adyacentes);
                  if(sumaValida(Sol,adyacentes,MAX)){
-                     crearListaDistribucion(Sol,adyacentes,MAX);
+                     crearListaDistribucion(Sol,adyacentes,MAX);    
                      //generarAcciones(crearListaDistribucion(Sol,adyacentes,MAX),adyacentes); 
                  }              
-                 System.out.println();
+                 //System.out.println();
             }           
         }else{
             for(i=0;i<=s;i++){
@@ -139,19 +144,14 @@ public class Tractor {
     
     public Distribucion[] crearListaDistribucion(int[] cantidades,ArrayList<Casilla> casillas,int MAX){
         Distribucion[] listaDistribucion = new Distribucion[cantidades.length];
-        Accion[] listaAcciones = new Accion[cantidades.length];
+        //Accion[] listaAcciones = new Accion[cantidades.length];
         System.out.print("[");
-        
             for(int i=0;i<cantidades.length;i++){
-                //listaSuma.add(sol[i]+adyacentes.get(i).getCantArena());   
                 listaDistribucion[i] = new Distribucion(cantidades[i],casillas.get(i));
-                //listaAcciones[i] = new Accion(casillas.get(j),listaDistribucion,1);
-                //System.out.print(listaDistribucion[i]);//Imprime la lista de distribucion
                 System.out.print(listaDistribucion[i]);          
-            }
-        
-             
+            } 
         System.out.print("]");
+        System.out.println();
         return listaDistribucion;
     }
  

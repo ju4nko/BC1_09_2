@@ -7,13 +7,16 @@ public class Nodo {
 	private int costo; 
 	private Accion accion; 
 	private int valor; 
+        private int profundidad;
 	
-	public Nodo(Nodo padre, Estado estado, int costo, Accion accion, int valor, int profundidad){
+	public Nodo(Nodo padre, Estado estado, int costo, 
+                Accion accion, int valor, int profundidad){
 		this.padre = padre;
 		this.estado = estado;
 		this.costo = costo;
 		this.accion = accion;
 		this.valor = valor;
+                this.profundidad=profundidad;
 	}
 	
 	public Nodo getPadre() {
@@ -46,6 +49,13 @@ public class Nodo {
 	public void setValor(int valor) {
 		this.valor = valor;
 	}
+        
+        public int getProfundidad(){
+            return profundidad;
+        }
+        public void setProfundidad(int profundidad){
+            this.profundidad = profundidad;
+        }
 	
 	/**
 	 * Comparacion de los nodos en la estructura
@@ -64,6 +74,6 @@ public class Nodo {
 	@Override
 	public String toString() {
 		return "Nodo [Padre=" + getPadre() + ", Estado=" + getEstado() + ", Costo=" + getCosto() 
-		+ ", Accion=" + getAccion() + ", Valor=" + getValor() + "]";
+		+ ", Accion=" + getAccion() + ", Valor=" + getValor() + ", Profundidad=" +getProfundidad()+ "]";
 	}
 }

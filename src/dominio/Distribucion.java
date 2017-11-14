@@ -17,6 +17,12 @@ public class Distribucion {
         this.cantidad = cantidad;
         this.casilla = casilla;
     }
+    public int getCantidad(){
+        return cantidad;
+    }
+    public Casilla getCasilla(){
+        return casilla;
+    }
     
     @Override
     public String toString(){
