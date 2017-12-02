@@ -75,23 +75,6 @@ public class Tractor {
             }
         }       
     }
-    /**
-     * Método Que suma dos listas para dar una resultado de la suma de ambas
-     * @param sol
-     * @param adyacentes
-     * @param MAX
-     * @return 
-     */
-    public ArrayList<Integer> sumarListas(int[] sol,ArrayList<Casilla> adyacentes,int MAX){
-        ArrayList<Integer> listaSuma = new ArrayList<Integer>();
-        int suma =0;
-        for(int i=0;i<sol.length;i++){
-            suma= sol[i]+adyacentes.get(i).getCantArena();
-            listaSuma.add(sol[i]+adyacentes.get(i).getCantArena());   
-                      
-        }
-        return listaSuma;
-    }
     
     public boolean sumaValida(int[] sol, ArrayList<Casilla> adyacentes,int MAX){
         int suma = 0;
@@ -103,20 +86,14 @@ public class Tractor {
         }
         return true;
     }
-    public boolean listaValida(ArrayList<Casilla> adyacentes,int MAX){
-        for(int i=0;i<adyacentes.size();i++){
-            return adyacentes.get(i).getCantArena()>MAX;
-        }
-        return true;
-    }
     
-    public void generarAcciones(Distribucion[] listaDist,ArrayList<Casilla> adyacentes,
-                                 int[] Sol,int MAX){  
-        Accion acciones[] = new Accion[listaDist.length];
-        for(int i=0;i<adyacentes.size();i++){
-            //crearListaDistribucion(Sol,adyacentes,MAX,adyacentes);
-        }       
-    }
+//    public void generarAcciones(Distribucion[] listaDist,ArrayList<Casilla> adyacentes,
+//                                 int[] Sol,int MAX){  
+//        Accion acciones[] = new Accion[listaDist.length];
+//        for(int i=0;i<adyacentes.size();i++){
+//            //crearListaDistribucion(Sol,adyacentes,MAX,adyacentes);
+//        }       
+//    }
      
    /**
     * COMPARAMOS SI ES IGUAL A LA CANTIDAD DESEADA 
@@ -155,15 +132,15 @@ public class Tractor {
         return listaDistribucion;
     }
  
-    public ArrayList<Integer> getListaArenaAdyacentes(ArrayList<Casilla> casillas){
-        ArrayList<Integer> cantidades = new ArrayList();
-        
-        for(int i=0; i<casillas.size();i++){
-            cantidades.add(casillas.get(i).getCantArena());
-        }
-        
-        return cantidades;
-    }
+//    public ArrayList<Integer> getListaArenaAdyacentes(ArrayList<Casilla> casillas){
+//        ArrayList<Integer> cantidades = new ArrayList();
+//        
+//        for(int i=0; i<casillas.size();i++){
+//            cantidades.add(casillas.get(i).getCantArena());
+//        }
+//        
+//        return cantidades;
+//    }
     
     public void imprimirLista(ArrayList<Casilla> lista){
         System.out.println("LAS CANTIDADES DE ARENA DE LOS ADYACENTES SON: ");
@@ -173,14 +150,14 @@ public class Tractor {
         }
         System.out.println("]");
     }
-    
-    public void imprimeLista(ArrayList lista){
-        System.out.print("[ ");
-        for(int i=0;i<lista.size();i++){
-            System.out.print(lista.get(i)+ " ");
-        }
-        System.out.println("] ");
-    }
+//    
+//    public void imprimeLista(ArrayList lista){
+//        System.out.print("[ ");
+//        for(int i=0;i<lista.size();i++){
+//            System.out.print(lista.get(i)+ " ");
+//        }
+//        System.out.println("] ");
+//    }
         
         
     public int genAleatorio(int min,int max){

@@ -25,6 +25,19 @@ public class Problema {
         this.estadoInicial= estadoInicial;
     }
     
+     public boolean esObjetivo(Estado estado){
+        Casilla[][] casillas = estado.getTerreno().getCasillas();
+        int k = estado.getTerreno().getK();
+        for(int i=0;i<casillas.length;i++){
+            for(int j=0;j<casillas[i].length;j++){
+                if(casillas[i][j].getCantArena()!=k){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
     public Estado estadoInicial(){
         return estadoInicial;
     }
@@ -70,6 +83,48 @@ public class Problema {
         return listaSolucion;
         
     }
+    
+     
+     public LinkedList<Nodo> busquedaAcotada(Problema problema,String estrategia,int prof_max){
+        //Inicialización
+        Nodo n_actual;
+        ArrayList<Distribucion> LS = new ArrayList<Distribucion>();
+        LinkedList<Nodo> LN = new LinkedList<Nodo>();
+        
+        Frontera frontera = new Frontera();
+        frontera.crearFrontera();
+        Nodo n_inicial = new Nodo(null,problema.estadoInicial(),0,null,0,0);
+        frontera.insertar(n_inicial);
+        boolean solucion = false;
+        n_actual = n_inicial;
+        
+        while(!solucion && !frontera.esVacia() ){
+            n_actual= frontera.eliminar();
+            if(problema.esObjetivo(n_actual.getEstado())){
+                solucion = true;
+            }else{
+                LS = problema.getEspacioEstados().listaSucesores;
+                LN = problema.crearListaNodos(LS, n_actual, prof_max, estrategia);
+                frontera.insertarLista(LN);
+            }
+            
+        }
+        if(solucion==true){
+            return problema.crearSolucion(n_actual);
+        }else{
+            return null;
+        }
+    }
+     
+     public LinkedList<Nodo> busquedaA(Problema problema,String estrategia,int prof_max,int inc_prof){
+         int prof_actual = inc_prof;
+         LinkedList<Nodo> ListaSolucion = null;
+         while(ListaSolucion==null && (prof_actual<=prof_max)){
+             ListaSolucion = busquedaAcotada(problema,estrategia,prof_actual);
+             prof_actual=prof_actual+inc_prof;
+         }
+         return ListaSolucion;
+     }
     
     
 }

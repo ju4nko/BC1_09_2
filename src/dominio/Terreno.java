@@ -11,6 +11,13 @@ import persistencia.LeerFichero;
 /**
  *
  * @author juanjo,guillermo y raquel
+ * 
+ * 
+ * TERRENO CAMBIAR ACCIONTRACTOR
+ * 
+ * 
+ * 
+ * 
  */
 public class Terreno {
     //O,N,E,S
@@ -158,7 +165,7 @@ public class Terreno {
         listaArena = lectura.leerTerreno(ruta);
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
-                casillas[i][j] = new Casilla(i, j,listaArena.get(0));
+                casillas[i][j] = new Casilla(i, j,5);
                 System.out.print(listaArena.get(0));
                 listaArena.remove(0);
             }

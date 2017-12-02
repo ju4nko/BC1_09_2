@@ -6,10 +6,10 @@ public class Sucesor {
 	private Accion accion;
 	private Estado estado;
 	private int coste;
-	public Sucesor(Accion accion, Estado padre, int k_objetivo){
+	public Sucesor(Accion accion, Estado padre, int nuevo_coste){
 		this.accion = accion;
 		this.coste = 0;
-		//generarEstadoSucesor(padre, k_objetivo);
+		//this.nuevo_coste = padre.Costo(accion);
 	}
 	///////////////////////
 	////Metodos Get-Set////
@@ -36,6 +36,7 @@ public class Sucesor {
 	public String toString(){
 		return ">"+accion+"\n>"+estado+"\n>"+coste;
 	}
+        
 	
 	
 }

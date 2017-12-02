@@ -11,6 +11,7 @@ import java.util.ArrayList;
  *
  * @author juanjo
  */
+
 public class EspacioEstados {
     Estado estado_final;
     Estado estado_actual;
@@ -19,23 +20,8 @@ public class EspacioEstados {
     public EspacioEstados(Estado estado_final,Estado estado_actual){
         this.estado_actual = estado_actual;
         this.estado_final = estado_final;
-        listaSucesores = new ArrayList<Distribucion>();
-        
+        listaSucesores = new ArrayList<Distribucion>();    
     }
-    
-    public boolean estadoMeta(Estado estado){
-        Casilla[][] casillas = estado.getTerreno().getCasillas();
-        int k = estado.getTerreno().getK();
-        for(int i=0;i<casillas.length;i++){
-            for(int j=0;j<casillas[i].length;j++){
-                if(casillas[i][j].getCantArena()!=k){
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-    
      public ArrayList<Casilla> accionTractor(Estado estado) {
         int i, j;
         Casilla aux;
@@ -87,66 +73,7 @@ public class EspacioEstados {
      public boolean EstaVisitado(Casilla aux,Estado estado) {
         return estado.getTerreno().getCasillas()[aux.getFila()][aux.getColumna()].isVisitado();
     }
-     
-     public void backtracking(int etapa,int Sol[],int s,
-                               ArrayList<Casilla> adyacentes,int MAX){
-        int i;
-        if(etapa==Sol.length){
-            if(esSolucion(Sol,etapa,s)){
-                 // IMPRIMIMOS LAS COMBINACIONES POSIBLES DE DISTRIBUIR ARENA
-                 //imprimirSol(Sol,adyacentes);
-                 if(sumaValida(Sol,adyacentes,MAX)){
-                     
-                        System.out.print("[");
-                            for(int j=0;j<Sol.length;j++){
-                                 
-                                listaSucesores.add(new Distribucion(Sol[j],adyacentes.get(j)));
-                                //System.out.print(listaSucesores.get(j));
-                            } 
-                            System.out.print("]");
-                            System.out.println();
-                     
-                 }              
-                 //System.out.println();
-            }           
-        }else{
-            for(i=0;i<=s;i++){
-                    Sol[etapa] = i;
-                    backtracking(etapa+1,Sol,s,adyacentes,MAX); 
-            }
-        }       
-    }
-     public boolean sumaValida(int[] sol, ArrayList<Casilla> adyacentes,int MAX){
-        int suma = 0;
-        for(int i=0;i<sol.length;i++){
-            suma = sol[i]+adyacentes.get(i).getCantArena();
-            if(suma>MAX){
-                return false;
-            }
-        }
-        return true;
-    }
-     public boolean esSolucion(int sol[],int etapa,int valor){
-       int suma=0;
-       for(int i=0;i<sol.length;i++){
-           suma+=sol[i];
-       }
-       return suma==valor;
-   }
-     public ArrayList<Distribucion> crearListaDistribucion(int[] cantidades,ArrayList<Casilla> casillas,int MAX){
-        ArrayList<Distribucion> listaDistribucion = new ArrayList();
-        //Accion[] listaAcciones = new Accion[cantidades.length];
-        System.out.print("[");
-            for(int i=0;i<cantidades.length;i++){
-                //llistaDistribucion[i] = new Distribucion(cantidades[i],casillas.get(i));
-                //System.out.print(listaDistribucion[i]);  
-                listaDistribucion.add(new Distribucion(cantidades[i],casillas.get(i)));
-                System.out.print(listaDistribucion.get(i));
-            } 
-        System.out.print("]");
-        System.out.println();
-        return listaDistribucion;
-    }
+   
      public void imprimeSucesores(){
          for(int i=0;i<listaSucesores.size();i++){
              System.out.print(listaSucesores.get(i));

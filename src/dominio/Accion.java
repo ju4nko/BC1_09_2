@@ -30,4 +30,14 @@ public class Accion {
         cadena+="]";
         return cadena;
     }
+    
+    
+    public static void main(String[] args){
+        Casilla destino = new Casilla(1,0,6);
+        Casilla c1 = new Casilla(0,0,3);
+        Casilla c2 = new Casilla(0,0,5);
+        //Distribucion d1 = new Distribucion();
+        //ListaDistribucion();
+        //new Accion(destino,);
+    }
 }

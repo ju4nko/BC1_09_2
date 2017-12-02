@@ -80,8 +80,8 @@ public class Simulacion {
                     t.getTractor().imprimirLista(listaCasillas);
                     int sol[] = new int[listaCasillas.size()];
                     int s = casillaTractor.getCantArena()-k;
-                    //t.getTractor().backtracking(0, sol, s, listaCasillas,MAX);
-                    espacioEstados.backtracking(0, sol, s, listaCasillas,MAX);
+                    t.getTractor().backtracking(0, sol, s, listaCasillas,MAX);
+                    //espacioEstados.backtracking(0, sol, s, listaCasillas,MAX);
                     espacioEstados.imprimeSucesores();
                     
                 break;
@@ -92,46 +92,5 @@ public class Simulacion {
                 break;
             }
     }
-    
-     public LinkedList<Nodo> busquedaAcotada(Problema problema,String estrategia,int prof_max){
-        //Inicialización
-        Nodo n_actual;
-        ArrayList<Distribucion> LS = new ArrayList<Distribucion>();
-        LinkedList<Nodo> LN = new LinkedList<Nodo>();
-        
-        Frontera frontera = new Frontera();
-        frontera.crearFrontera();
-        Nodo n_inicial = new Nodo(null,problema.estadoInicial(),0,null,0,0);
-        frontera.insertar(n_inicial);
-        boolean solucion = false;
-        n_actual = n_inicial;
-        
-        while(!solucion && !frontera.esVacia() ){
-            n_actual= frontera.eliminar();
-            if(problema.getEspacioEstados().estadoMeta(n_actual.getEstado())){
-                solucion = true;
-            }else{
-                LS = problema.getEspacioEstados().listaSucesores;
-                LN = problema.crearListaNodos(LS, n_actual, prof_max, estrategia);
-                frontera.insertarLista(LN);
-            }
-            
-        }
-        if(solucion==true){
-            return problema.crearSolucion(n_actual);
-        }else{
-            return null;
-        }
-    }
-     
-     public LinkedList<Nodo> busqueda(Problema problema,String estrategia,int prof_max,int inc_prof){
-         int prof_actual = inc_prof;
-         LinkedList<Nodo> ListaSolucion = null;
-         while(ListaSolucion==null && (prof_actual<=prof_max)){
-             ListaSolucion = busquedaAcotada(problema,estrategia,prof_actual);
-             prof_actual=prof_actual+inc_prof;
-         }
-         return ListaSolucion;
-     }
         
 }
